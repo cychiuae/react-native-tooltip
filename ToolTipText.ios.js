@@ -23,7 +23,11 @@ var ViewClass = React.createClass({
   },
 
   showToolTipMenu: function() {
-    ToolTipMenu.show(React.findNodeHandle(this.refs.toolTipText), this.getActionTexts());
+    if (this.props.showMenuToTheLeft) {
+      ToolTipMenu.show(React.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), true);
+    } else {
+      ToolTipMenu.show(React.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), false);
+    }
   },
 
   onToolTipActionSelected: function(event: Event) {

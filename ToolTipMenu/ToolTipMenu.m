@@ -16,7 +16,8 @@ RCT_EXPORT_MODULE()
 }
 
 RCT_EXPORT_METHOD(show:(nonnull NSNumber *)reactTag
-                  items: (NSArray *)items)
+                  items: (NSArray *)items
+                  showMenuToTheLeft: (BOOL)showMenuToTheLeft)
 {
     UIView *view = [self.bridge.uiManager viewForReactTag:reactTag];
     NSArray *buttons = items;
@@ -29,10 +30,14 @@ RCT_EXPORT_METHOD(show:(nonnull NSNumber *)reactTag
     }
     [view becomeFirstResponder];
     UIMenuController *menuCont = [UIMenuController sharedMenuController];
-    [menuCont setTargetRect:CGRectMake(view.frame.origin.x - view.frame.size.width / 2,
-                                       view.frame.origin.y,
-                                       view.frame.size.width,
-                                       view.frame.size.height) inView:view.superview];
+    CGRect rect = view.frame;
+    if (showMenuToTheLeft) {
+        rect = CGRectMake(view.frame.origin.x - view.frame.size.width / 4 * 3,
+                          view.frame.origin.y,
+                          view.frame.size.width,
+                          view.frame.size.height);
+    }
+    [menuCont setTargetRect:rect inView:view.superview];
     menuCont.arrowDirection = UIMenuControllerArrowDown;
     menuCont.menuItems = menuItems;
     [menuCont setMenuVisible:YES animated:YES];
