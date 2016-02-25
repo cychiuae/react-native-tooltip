@@ -29,7 +29,10 @@ RCT_EXPORT_METHOD(show:(nonnull NSNumber *)reactTag
     }
     [view becomeFirstResponder];
     UIMenuController *menuCont = [UIMenuController sharedMenuController];
-    [menuCont setTargetRect:view.frame inView:view.superview];
+    [menuCont setTargetRect:CGRectMake(view.frame.origin.x - view.frame.size.width / 2,
+                                       view.frame.origin.y,
+                                       view.frame.size.width,
+                                       view.frame.size.height) inView:view.superview];
     menuCont.arrowDirection = UIMenuControllerArrowDown;
     menuCont.menuItems = menuItems;
     [menuCont setMenuVisible:YES animated:YES];
