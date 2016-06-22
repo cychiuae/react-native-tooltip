@@ -1,32 +1,35 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React, {
+  PropTypes,
+} from 'react';
+import ReactNative, {
   requireNativeComponent,
+  NativeModules,
   TouchableHighlight,
-  View
-} = React;
+  View,
+} from 'react-native';
 
-var ToolTipMenu = React.NativeModules.ToolTipMenu;
+var ToolTipMenu = NativeModules.ToolTipMenu;
 var RCTToolTipText = requireNativeComponent('RCTToolTipText', null);
 
 var ViewClass = React.createClass({
 
   propTypes: {
-    actions: React.PropTypes.arrayOf(React.PropTypes.shape({
-        text: React.PropTypes.string.isRequired,
-        command: React.PropTypes.string.isRequired,
+    actions: PropTypes.arrayOf(PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        command: PropTypes.string.isRequired,
         })),
-    onActionSelected: React.PropTypes.func.isRequired,
-    longPress: React.PropTypes.bool,
+    onActionSelected: PropTypes.func.isRequired,
+    longPress: PropTypes.bool,
     ...TouchableHighlight.propTypes,
   },
 
   showToolTipMenu: function() {
     if (this.props.showMenuToTheLeft) {
-      ToolTipMenu.show(React.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), true);
+      ToolTipMenu.show(ReactNative.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), true);
     } else {
-      ToolTipMenu.show(React.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), false);
+      ToolTipMenu.show(ReactNative.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), false);
     }
   },
 
