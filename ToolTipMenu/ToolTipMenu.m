@@ -1,8 +1,8 @@
 #import "ToolTipMenu.h"
 
-#import "RCTBridge.h"
+#import <React/RCTBridge.h>
+#import <React/RCTUIManager.h>
 #import "RCTToolTipText.h"
-#import "RCTUIManager.h"
 
 @implementation ToolTipMenu
 
