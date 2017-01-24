@@ -1,16 +1,17 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import ReactNative, {
   requireNativeComponent,
+  NativeModules,
   TouchableHighlight,
-  View
-} = React;
+  View,
+} from 'react-native';
 
-var ToolTipMenu = React.NativeModules.ToolTipMenu;
-var RCTToolTipText = requireNativeComponent('RCTToolTipText', null);
+const ToolTipMenu = NativeModules.ToolTipMenu;
+const RCTToolTipText = requireNativeComponent('RCTToolTipText', null);
 
-var ViewClass = React.createClass({
+const ViewClass = React.createClass({
 
   propTypes: {
     actions: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -24,9 +25,9 @@ var ViewClass = React.createClass({
 
   showToolTipMenu: function() {
     if (this.props.showMenuToTheLeft) {
-      ToolTipMenu.show(React.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), true);
+      ToolTipMenu.show(ReactNative.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), true);
     } else {
-      ToolTipMenu.show(React.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), false);
+      ToolTipMenu.show(ReactNative.findNodeHandle(this.refs.toolTipText), this.getActionTexts(), false);
     }
   },
 
