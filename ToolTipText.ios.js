@@ -7,19 +7,21 @@ import ReactNative, {
   TouchableHighlight,
   View,
 } from 'react-native';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 
 const ToolTipMenu = NativeModules.ToolTipMenu;
 const RCTToolTipText = requireNativeComponent('RCTToolTipText', null);
 
-const ViewClass = React.createClass({
+const ViewClass = createReactClass({
 
   propTypes: {
-    actions: React.PropTypes.arrayOf(React.PropTypes.shape({
-        text: React.PropTypes.string.isRequired,
-        command: React.PropTypes.string.isRequired,
+    actions: PropTypes.arrayOf(PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        command: PropTypes.string.isRequired,
         })),
-    onActionSelected: React.PropTypes.func.isRequired,
-    longPress: React.PropTypes.bool,
+    onActionSelected: PropTypes.func.isRequired,
+    longPress: PropTypes.bool,
     ...TouchableHighlight.propTypes,
   },
 
